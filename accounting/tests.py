@@ -98,6 +98,11 @@ class TestReturnAccountBalance(unittest.TestCase):
         pa = PolicyAccounting(self.policy.id)
         self.assertEquals(pa.return_account_balance(date_cursor=self.policy.effective_date), 300)
 
+    def test_monthly_on_eff_date(self):
+        self.policy.billing_schedule = "Monthly"
+        pa = PolicyAccounting(self.policy.id)
+        self.assertEquals(pa.return_account_balance(date_cursor=self.policy.effective_date), 100)
+
     def test_quarterly_on_last_installment_bill_date(self):
         self.policy.billing_schedule = "Quarterly"
         pa = PolicyAccounting(self.policy.id)
